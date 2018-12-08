@@ -2,9 +2,10 @@
 #-*- coding: utf-8 -*-
 
 from robot import Robot #Import a base Robot
+from math  import *
 
 def isEnemy (botName):
-    botName == "EuhBot"
+    return botName != "EuhBot"
 
 class EuhBot (Robot): 
     def init (self):
@@ -16,6 +17,8 @@ class EuhBot (Robot):
         size = self.getMapSize() 
         self.radarVisible(True) 
         self.lockRadar("gun")
+
+        self.target = None
         
     def run (self):
         self.gunTurn(5)
@@ -59,7 +62,16 @@ class EuhBot (Robot):
     
     def onTargetSpotted (self, botId, botName, botPos):
         if (isEnemy(botName)):
-            self.fire(10)
+            if (self.target is None or
+                self.target == botId):
+                
+                #setting a constant target here so it won't
+                #go firing at everyone
+                self.target = botId 
+                #this shit doesn't work lmao
+                self.gunTurn(20)
+                self.fire(10)
+                self.gunTurn(5)
 
         self.rPrint("I see the bot:" + str(botId) + "on position: x:"
                     + str(botPos.x()) + " , y:" + str(botPos.y()))
