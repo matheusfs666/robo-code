@@ -16,12 +16,12 @@ class EuhBot (Robot):
         
         size = self.getMapSize() 
         self.radarVisible(True) 
-        self.lockRadar("gun")
+        #self.lockRadar("gun")
 
         self.target = None
         
     def run (self):
-        self.gunTurn(5)
+        self.radarTurn(180)
         pass
     
     def sensors (self): 
