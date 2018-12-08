@@ -3,6 +3,9 @@
 
 from robot import Robot #Import a base Robot
 
+def isEnemy (botName):
+    botName == "EuhBot"
+
 class EuhBot (Robot): 
     def init (self):
         self.setColor(255, 36, 0)
@@ -55,11 +58,8 @@ class EuhBot (Robot):
         self.rPrint("damn I'm Dead")
     
     def onTargetSpotted (self, botId, botName, botPos):
-        if (self.isEnemy(botName)):
+        if (isEnemy(botName)):
             self.fire(10)
 
         self.rPrint("I see the bot:" + str(botId) + "on position: x:"
                     + str(botPos.x()) + " , y:" + str(botPos.y()))
-
-    def isEnemy (self, botName):
-        botName == "EuhBot"
